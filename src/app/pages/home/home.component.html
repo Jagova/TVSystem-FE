@@ -1,0 +1,11 @@
+<div class="container mt-3">
+    <h1 class="mb-3">List of TV Shows</h1>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let tvShow of tvShows">
+            <app-tv-show-card [tvShow]="tvShow"></app-tv-show-card>
+        </div>
+    </div>
+    <ng-template #noTvShows>
+        <p>No TV shows found.</p>
+    </ng-template>
+</div>
