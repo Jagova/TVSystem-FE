@@ -9,15 +9,11 @@ import { adminGuard } from './guards/admin.guard';
 import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: MainLayoutComponent,
-    children: [
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'admin', component: AdminComponent, canActivate: [adminGuard] },
-      { path: 'tvshows/:id', component: ShowDetailComponent }
-    ]
-  }
+
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [adminGuard] },
+  { path: 'tvshows/:id', component: ShowDetailComponent }
+
 ];

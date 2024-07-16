@@ -19,6 +19,18 @@ export class TvShowService {
     return this.http.get<TvShow>(`${this.apiUrl}/${id}`);
   }
 
+  createTvShow(tvShow: TvShow): Observable<TvShow> {
+    return this.http.post<TvShow>(this.apiUrl, tvShow);
+  }
+
+  updateTvShow(id: string, tvShow: TvShow): Observable<TvShow> {
+    return this.http.put<TvShow>(`${this.apiUrl}/${id}`, tvShow);
+  }
+
+  deleteTvShow(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
   likeTvShow(id: string, userId: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${id}/like`, {
       userId

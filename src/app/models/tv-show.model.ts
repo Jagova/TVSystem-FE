@@ -6,5 +6,5 @@ export interface TvShow {
     image: string;
     description: string;
     genre: string;
-    likes: string[];
+    likes?: string[];
 }

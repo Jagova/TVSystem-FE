@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -12,32 +12,27 @@ export class AuthService {
   private tokenKey = 'authToken';
   private userKey = 'user';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  private router = inject(Router);
+
+  constructor(private http: HttpClient) { }
 
   login(credentials: { username: string, password: string }): Observable<any> {
-    return new Observable(observer => {
-      this.http.post(`${this.apiUrl}/login`, credentials).subscribe({
-        next: (res: any) => {
-          localStorage.setItem(this.tokenKey, res.token);
-          localStorage.setItem(this.userKey, JSON.stringify(res.user)); // Guardar el objeto user en localStorage
-          this.router.navigate(['/']);
-          observer.next(res);
-          observer.complete();
-        },
-        error: (err) => {
-          observer.error(err);
-        }
-      });
-    });
+    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+      tap((res: any) => {
+        localStorage.setItem(this.tokenKey, res.token);
+        localStorage.setItem(this.userKey, JSON.stringify(res.user));
+        this.router.navigate(['/']);
+      })
+    );
   }
 
-  register(user: { username: string, password: string, email: string }) {
+  register(user: { username: string, password: string, email: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
 
   logout() {
     localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.userKey); 
+    localStorage.removeItem(this.userKey);
     this.router.navigate(['/login']);
   }
 
@@ -52,7 +47,7 @@ export class AuthService {
 
   getUserId(): string {
     const user = this.getUser();
-    return  user?._id ?? '';
+    return user?._id ?? '';
   }
 
   getUsername(): string {

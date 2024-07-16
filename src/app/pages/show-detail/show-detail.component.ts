@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import { TvShowService } from '../../services/tv-show.service';
 import { TvShow } from '../../models/tv-show.model';
-import { AuthService } from '../../services/auth.service'; // Suponiendo que tienes un AuthService
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-show-detail',
@@ -29,7 +29,7 @@ export class ShowDetailComponent implements OnInit {
       this.tvShowService.getTvShowById(id).subscribe({
         next: (tvShow) => {
           this.tvShow = tvShow;
-          this.isLiked = this.tvShow.likes.includes(this.authService.getUserId());
+          this.isLiked = this.tvShow.likes!.includes(this.authService.getUserId());
         },
         error: (error) => console.error('There was an error!', error)
       });
@@ -47,7 +47,7 @@ export class ShowDetailComponent implements OnInit {
     if (this.isLiked) {
       this.tvShowService.dislikeTvShow(this.tvShow!._id!, userId).subscribe({
         next: () => {
-          this.tvShow!.likes = this.tvShow!.likes.filter(id => id !== userId);
+          this.tvShow!.likes = this.tvShow!.likes!.filter(id => id !== userId);
           this.isLiked = false;
         },
         error: (error) => console.error('There was an error!', error)
@@ -55,7 +55,7 @@ export class ShowDetailComponent implements OnInit {
     } else {
       this.tvShowService.likeTvShow(this.tvShow!._id!, userId).subscribe({
         next: () => {
-          this.tvShow!.likes.push(userId);
+          this.tvShow!.likes!.push(userId);
           this.isLiked = true;
         },
         error: (error) => console.error('There was an error!', error)

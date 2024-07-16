@@ -9,7 +9,7 @@
             <p><strong>Episodes:</strong> {{ tvShow.episodes }}</p>
             <p><strong>Genre:</strong> {{ tvShow.genre }}</p>
             <p>{{ tvShow.description }}</p>
-            <p><strong>Likes:</strong> {{ tvShow.likes.length }}</p>
+            <p><strong>Likes:</strong> {{ tvShow.likes!.length }}</p>
             <button (click)="toggleLike()" class="btn btn-primary">
                 {{ isLiked ? 'Ya no me gusta' : 'Me gusta' }}
             </button>

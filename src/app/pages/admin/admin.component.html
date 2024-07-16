@@ -1,1 +1,28 @@
-<p>admin works!</p>
+<div class="container mt-3">
+  <h1>Admin Panel</h1>
+  <button class="btn btn-primary mb-3" (click)="openCreateDialog()">Add TV Show</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Year</th>
+        <th scope="col">Episodes</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tvShow of tvShows">
+        <td>{{ tvShow.name }}</td>
+        <td>{{ tvShow.year }}</td>
+        <td>{{ tvShow.episodes }}</td>
+        <td>
+          <button class="btn btn-secondary btn-sm" (click)="openEditDialog(tvShow)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="openDeleteDialog(tvShow)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal Component -->
+  <app-tv-show-dialog (save)="onSave($event)"></app-tv-show-dialog>
+</div>

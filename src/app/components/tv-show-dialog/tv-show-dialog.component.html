@@ -1,0 +1,42 @@
+<div id="tvShowModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ title }}</h5>
+                <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="tvShowForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" formControlName="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="text" id="year" class="form-control" formControlName="year" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="episodes">Episodes</label>
+                        <input type="text" id="episodes" class="form-control" formControlName="episodes" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image URL</label>
+                        <input type="text" id="image" class="form-control" formControlName="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" class="form-control" formControlName="description"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <input type="text" id="genre" class="form-control" formControlName="genre" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="tvShowForm.invalid">{{ action }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
