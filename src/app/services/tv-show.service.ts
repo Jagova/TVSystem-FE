@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TvShow } from '../models/tv-show.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TvShowService {
-  private apiUrl = 'http://localhost:8080/api/tvshows';
+  private apiUrl = `${environment.apiBaseUrl}/tvshows`;
 
   constructor(private http: HttpClient) { }
 
